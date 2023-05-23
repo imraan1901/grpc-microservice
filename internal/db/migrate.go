@@ -10,7 +10,7 @@ import (
 )
 
 func (s *Store) Migrate() error {
-	driver, err := postgres.WithInstance(s.db.db, &postgres.Config{})
+	driver, err := postgres.WithInstance(s.db.DB, &postgres.Config{})
 	if err != nil {
 		return err
 	}
