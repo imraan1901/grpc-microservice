@@ -1,0 +1,3 @@
+[submodule "grpc-proto"]
+	path = grpc-proto
+	url = https://github.com/imraan1901/grpc-proto

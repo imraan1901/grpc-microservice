@@ -6,14 +6,14 @@ import "context"
 
 // Rocket should contain the definition of our rocket
 type Rocket struct {
-	ID string
-	Name string
-	Type string
+	ID      string
+	Name    string
+	Type    string
 	Flights int
-} 
+}
 
 // Store - defines the interface we expect
-// our database implementation to follow 
+// our database implementation to follow
 type Store interface {
 	GetRocketByID(id string) (Rocket, error)
 	InsertRocket(rkt Rocket) (Rocket, error)
@@ -51,7 +51,7 @@ func (s Service) InsertRocket(ctx context.Context, rkt Rocket) (Rocket, error) {
 }
 
 // DeleteRocket - deleted a rocket from our inventory
-func (s Service) DeleteRocket(id string) error {
+func (s Service) DeleteRocket(ctx context.Context, id string) error {
 	err := s.Store.DeleteRocket(id)
 	if err != nil {
 		return err
