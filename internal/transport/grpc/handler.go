@@ -2,6 +2,7 @@ package grpc
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"net"
 
@@ -48,12 +49,45 @@ func (h Handler) Serve() error {
 	return nil
 }
 
+// GetRocket - retrieves a rocket by id and returns the response
 func (h Handler) GetRocket(ctx context.Context, req *rkt.GetRocketRequest) (*rkt.GetRocketResponse, error) {
-	return &rkt.GetRocketResponse{}, nil
+	log.Println("GetRocket endpoint hit")
+
+	rocket, err := h.RocketService.GetRocketByID(ctx, req.Id)
+	if err != nil {
+		fmt.Printf("Failed to retrieve rocket by id: %s", err)
+		return &rkt.GetRocketResponse{}, nil
+	}
+
+	return &rkt.GetRocketResponse{
+		Rocket: &rkt.Rocket{
+			Id:   rocket.ID,
+			Name: rocket.Name,
+			Type: rocket.Type,
+		},
+	}, nil
 }
 
+// AddRocket - Adds rocket to the database
 func (h Handler) AddRocket(ctx context.Context, req *rkt.AddRocketRequest) (*rkt.AddRocketResponse, error) {
-	return &rkt.AddRocketResponse{}, nil
+	log.Println("AddRocket endpoint hit")
+
+	newRkt, err := h.RocketService.InsertRocket(ctx, rocket.Rocket{
+		ID:   req.Rocket.Id,
+		Name: req.Rocket.Name,
+		Type: req.Rocket.Type,
+	})
+	if err != nil {
+		log.Print("Failed to insert rocket into database")
+		return &rkt.AddRocketResponse{}, nil
+	}
+	return &rkt.AddRocketResponse{
+		Rocket: &rkt.Rocket{
+			Id:   newRkt.ID,
+			Name: newRkt.Name,
+			Type: newRkt.Type,
+		},
+	}, nil
 }
 
 func (h Handler) DeleteRocket(ctx context.Context, req *rkt.DeleteRocketRequest) (*rkt.DeleteRocketResponse, error) {

@@ -5,7 +5,7 @@ go 1.20
 require (
 	github.com/golang-migrate/migrate/v4 v4.15.2
 	github.com/golang/mock v1.6.0
-	github.com/imraan1901/grpc-proto v0.0.0-20230524234640-e45b2b69c8d8
+	github.com/imraan1901/grpc-proto v0.0.0-20230525194252-588a7d1e4e10
 	github.com/jmoiron/sqlx v1.3.5
 	github.com/lib/pq v1.10.0
 	github.com/stretchr/testify v1.8.3
