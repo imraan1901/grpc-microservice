@@ -51,7 +51,7 @@ func (h Handler) Serve() error {
 
 // GetRocket - retrieves a rocket by id and returns the response
 func (h Handler) GetRocket(ctx context.Context, req *rkt.GetRocketRequest) (*rkt.GetRocketResponse, error) {
-	log.Println("GetRocket endpoint hit")
+	log.Println("GetRocket gRPC endpoint hit")
 
 	rocket, err := h.RocketService.GetRocketByID(ctx, req.Id)
 	if err != nil {
@@ -70,7 +70,7 @@ func (h Handler) GetRocket(ctx context.Context, req *rkt.GetRocketRequest) (*rkt
 
 // AddRocket - Adds rocket to the database
 func (h Handler) AddRocket(ctx context.Context, req *rkt.AddRocketRequest) (*rkt.AddRocketResponse, error) {
-	log.Println("AddRocket endpoint hit")
+	log.Println("AddRocket gRPC endpoint hit")
 
 	newRkt, err := h.RocketService.InsertRocket(ctx, rocket.Rocket{
 		ID:   req.Rocket.Id,
@@ -90,6 +90,17 @@ func (h Handler) AddRocket(ctx context.Context, req *rkt.AddRocketRequest) (*rkt
 	}, nil
 }
 
+// DeleteRocket - Method to delete rocket
 func (h Handler) DeleteRocket(ctx context.Context, req *rkt.DeleteRocketRequest) (*rkt.DeleteRocketResponse, error) {
-	return &rkt.DeleteRocketResponse{}, nil
+	log.Print("DeleteRocket gRPC endpoint hit")
+	err := h.RocketService.DeleteRocket(ctx, req.Id)
+	if err != nil {
+		return &rkt.DeleteRocketResponse{
+			Status: err.Error(),
+		}, nil
+	}
+
+	return &rkt.DeleteRocketResponse{
+		Status: "Successfully deleted rocket",
+	}, nil
 }

@@ -35,7 +35,7 @@ message AddRocketResponse {
 
 // -- Delete Rocket Message Types --
 message DeleteRocketRequest {
-    Rocket id = 1;
+    string id = 1;
 }
 
 message DeleteRocketResponse {

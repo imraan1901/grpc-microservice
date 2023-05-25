@@ -279,7 +279,7 @@ type DeleteRocketRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id *Rocket `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 }
 
 func (x *DeleteRocketRequest) Reset() {
@@ -314,11 +314,11 @@ func (*DeleteRocketRequest) Descriptor() ([]byte, []int) {
 	return file_rocket_v1_rocket_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *DeleteRocketRequest) GetId() *Rocket {
+func (x *DeleteRocketRequest) GetId() string {
 	if x != nil {
 		return x.Id
 	}
-	return nil
+	return ""
 }
 
 type DeleteRocketResponse struct {
@@ -390,10 +390,9 @@ var file_rocket_v1_rocket_proto_rawDesc = []byte{
 	0x3b, 0x0a, 0x11, 0x41, 0x64, 0x64, 0x52, 0x6f, 0x63, 0x6b, 0x65, 0x74, 0x52, 0x65, 0x73, 0x70,
 	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x26, 0x0a, 0x06, 0x72, 0x6f, 0x63, 0x6b, 0x65, 0x74, 0x18, 0x01,
 	0x20, 0x01, 0x28, 0x0b, 0x32, 0x0e, 0x2e, 0x72, 0x6f, 0x63, 0x6b, 0x65, 0x74, 0x2e, 0x52, 0x6f,
-	0x63, 0x6b, 0x65, 0x74, 0x52, 0x06, 0x72, 0x6f, 0x63, 0x6b, 0x65, 0x74, 0x22, 0x35, 0x0a, 0x13,
+	0x63, 0x6b, 0x65, 0x74, 0x52, 0x06, 0x72, 0x6f, 0x63, 0x6b, 0x65, 0x74, 0x22, 0x25, 0x0a, 0x13,
 	0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x52, 0x6f, 0x63, 0x6b, 0x65, 0x74, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x12, 0x1e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32,
-	0x0e, 0x2e, 0x72, 0x6f, 0x63, 0x6b, 0x65, 0x74, 0x2e, 0x52, 0x6f, 0x63, 0x6b, 0x65, 0x74, 0x52,
+	0x65, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
 	0x02, 0x69, 0x64, 0x22, 0x2e, 0x0a, 0x14, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x52, 0x6f, 0x63,
 	0x6b, 0x65, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x73,
 	0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x74, 0x61,
@@ -444,18 +443,17 @@ var file_rocket_v1_rocket_proto_depIdxs = []int32{
 	0, // 0: rocket.GetRocketResponse.rocket:type_name -> rocket.Rocket
 	0, // 1: rocket.AddRocketRequest.rocket:type_name -> rocket.Rocket
 	0, // 2: rocket.AddRocketResponse.rocket:type_name -> rocket.Rocket
-	0, // 3: rocket.DeleteRocketRequest.id:type_name -> rocket.Rocket
-	1, // 4: rocket.RocketService.GetRocket:input_type -> rocket.GetRocketRequest
-	3, // 5: rocket.RocketService.AddRocket:input_type -> rocket.AddRocketRequest
-	5, // 6: rocket.RocketService.DeleteRocket:input_type -> rocket.DeleteRocketRequest
-	2, // 7: rocket.RocketService.GetRocket:output_type -> rocket.GetRocketResponse
-	4, // 8: rocket.RocketService.AddRocket:output_type -> rocket.AddRocketResponse
-	6, // 9: rocket.RocketService.DeleteRocket:output_type -> rocket.DeleteRocketResponse
-	7, // [7:10] is the sub-list for method output_type
-	4, // [4:7] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	1, // 3: rocket.RocketService.GetRocket:input_type -> rocket.GetRocketRequest
+	3, // 4: rocket.RocketService.AddRocket:input_type -> rocket.AddRocketRequest
+	5, // 5: rocket.RocketService.DeleteRocket:input_type -> rocket.DeleteRocketRequest
+	2, // 6: rocket.RocketService.GetRocket:output_type -> rocket.GetRocketResponse
+	4, // 7: rocket.RocketService.AddRocket:output_type -> rocket.AddRocketResponse
+	6, // 8: rocket.RocketService.DeleteRocket:output_type -> rocket.DeleteRocketResponse
+	6, // [6:9] is the sub-list for method output_type
+	3, // [3:6] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_rocket_v1_rocket_proto_init() }
