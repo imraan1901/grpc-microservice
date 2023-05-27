@@ -8,7 +8,10 @@ import (
 
 	"github.com/imraan1901/grpc-microservice/internal/rocket"
 	rkt "github.com/imraan1901/grpc-proto/rocket/v1"
+	"github.com/google/uuid"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 // RocketService - defines the interface that the concrete
@@ -71,6 +74,12 @@ func (h Handler) GetRocket(ctx context.Context, req *rkt.GetRocketRequest) (*rkt
 // AddRocket - Adds rocket to the database
 func (h Handler) AddRocket(ctx context.Context, req *rkt.AddRocketRequest) (*rkt.AddRocketResponse, error) {
 	log.Println("AddRocket gRPC endpoint hit")
+
+	if _, err := uuid.Parse(req.Rocket.Id); err != nil {
+		errorStatus := status.Error(codes.InvalidArgument, "uuid is not valid")
+		log.Print("given uuid is not valid")
+		return &rkt.AddRocketResponse{}, errorStatus
+	}
 
 	newRkt, err := h.RocketService.InsertRocket(ctx, rocket.Rocket{
 		ID:   req.Rocket.Id,
